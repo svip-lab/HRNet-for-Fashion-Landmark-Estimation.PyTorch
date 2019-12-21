@@ -16,7 +16,7 @@ Please note that every image in *DeepFashion2* contains multiple fashion items, 
 | pose_hrnet |Detector | 0.5563 | 0.7864 | 0.6260 | 0.4184 | 0.5583 | 0.6802 | 0.9336 | 0.7526 | 0.4779 | 0.6824 |
 | pose_hrnet |GT | 0.6714 | 0.9454 | 0.7578 | 0.5098 | 0.6736 | 0.7109 | 0.9567 | 0.7921 | 0.5254 | 0.7131 |
 
-**Note:** The results above were collected when we were participating the DeepFashion2 Challenge. We used 4 *NVIDIA GTX1080* GPUs with the `batch size per GPU` of 32 train the model.
+**Note:** The results above were collected when we were participating the DeepFashion2 Challenge. We used 4 *NVIDIA GTX1080* GPUs with `batch_size_per_GPU` of 32 to train the model.
 
 ### (New)Landmark estimation results on DeepFashion2 validation set
 | Arch       | BBox Source | AP   | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
@@ -24,7 +24,7 @@ Please note that every image in *DeepFashion2* contains multiple fashion items, 
 | pose_hrnet |Detector | 0.579 | 0.793 | 0.658 | 0.460 | 0.581 | 0.706 | 0.939 | 0.784 | 0.548 | 0.708 |
 | pose_hrnet | GT      |0.7017 | 0.9564 | 0.8010 | 0.5788 | 0.7033 | 0.7395 | 0.9653 | 0.8271 | 0.5921 | 0.7413 |
 
-**Note:** The results above were collected before we reorganize and pack this code repo. We used 4 *NVIDIA Titan Xp* GPUs with the `batch size per GPU` of 8, and fine-tuned the model for only one epoch and got a better performance.
+**Note:** The results above were collected before we reorganize and pack this code repo. We used 4 *NVIDIA Titan Xp* GPUs with `batch_size_per_GPU` of 8, and fine-tuned the model for only one epoch and got a better performance.
 
 ## Quick start
 ### Installation
@@ -51,15 +51,15 @@ Please note that every image in *DeepFashion2* contains multiple fashion items, 
 
    ```
    ${POSE_ROOT}
-   ├── lib
-   ├── tools 
-   ├── experiments
-   ├── models
-   ├── data
-   ├── log
-   ├── output
-   ├── README.md
-   └── requirements.txt
+   |-- lib
+   |-- tools 
+   |-- experiments
+   |-- models
+   |-- data
+   |-- log
+   |-- output
+   |-- README.md
+   `-- requirements.txt
    ```
 
 7. Download pretrained models from our [Onedrive Cloud Storage](#OneDrive-Cloud-Storage)
