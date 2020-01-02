@@ -176,6 +176,6 @@ hrnet-for-fashion-landmark-estimation.pytorch
 ### Experiment Configuration
 
 - For the regression target of keypoint heatmaps, we tuned the standard deviation value `sigma` and finally set it to 2.
-- During training, we found that the data augmentation from the original code was to intensive which makes the training process unstable. We weakened the augmentation parameters and observed performance gain.
-- Due to the imbalance of classes in *DeepFashion2* dataset, the models performace on different classes varies a lot. Therefore, we adopted a weighted sampling strategy rather than the naive random shuffling stategy, and observed performance gain.
+- During training, we found that the data augmentation from the original code was too intensive which makes the training process unstable. We weakened the augmentation parameters and observed performance gain.
+- Due to the imbalance of classes in *DeepFashion2* dataset, the model's performace on different classes varies a lot. Therefore, we adopted a weighted sampling strategy rather than the naive random shuffling stategy, and observed performance gain.
 - We expermented with the value of `weight decay`, and found that either `1e-4` or `1e-5` harms the performance. Therefore, we simply set `weight decay` to 0.
