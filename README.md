@@ -10,7 +10,10 @@ This code applies the HRNet ([*Deep High-Resolution Representation Learning for 
 Please note that every image in *DeepFashion2* contains multiple fashion items, while our model assumes that there exists only one item in each image. Therefore, what we feed into the HRNet is not the original image but the cropped ones provided by a detector. In experiments, one can either use the ground truth bounding box annotation to generate the input data or use the output of a detecter.
 
 ## Main Results
-### Landmark estimation results on DeepFashion2 validation set
+### Landmark Estimation Performance on DeepFashion2 Test set
+We won the third place in the "DeepFashion2 Challenge 2020 - Track 1 Clothes Landmark Estimation" competition.
+![DeepFashion2 Challenge 2020 - Track 1 Clothes Landmark Estimation](/figures/DF2_Challenge_Results.png)
+### Landmark Estimation Performance on DeepFashion2 Validation Set
 | Arch       | BBox Source | AP   | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | pose_hrnet |Detector | 0.579 | 0.793 | 0.658 | 0.460 | 0.581 | 0.706 | 0.939 | 0.784 | 0.548 | 0.708 |
