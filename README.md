@@ -14,7 +14,7 @@ Please note that every image in *DeepFashion2* contains multiple fashion items, 
 | Arch       | BBox Source | AP   | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | pose_hrnet |Detector | 0.579 | 0.793 | 0.658 | 0.460 | 0.581 | 0.706 | 0.939 | 0.784 | 0.548 | 0.708 |
-| pose_hrnet | GT      |0.7017 | 0.9564 | 0.8010 | 0.5788 | 0.7033 | 0.7395 | 0.9653 | 0.8271 | 0.5921 | 0.7413 |
+| pose_hrnet | GT      |0.702 | 0.956 | 0.801 | 0.579 | 0.703 | 0.740 | 0.965 | 0.827 | 0.592 | 0.741 |
 
 ## Quick start
 ### Installation
