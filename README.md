@@ -11,8 +11,9 @@ Please note that every image in *DeepFashion2* contains multiple fashion items, 
 
 ## Main Results
 ### Landmark Estimation Performance on DeepFashion2 Test set
-We won the third place in the "DeepFashion2 Challenge 2020 - Track 1 Clothes Landmark Estimation" competition.
+We won **the third place** in the "DeepFashion2 Challenge 2020 - Track 1 Clothes Landmark Estimation" competition.
 ![DeepFashion2 Challenge 2020 - Track 1 Clothes Landmark Estimation](/figures/DF2_Challenge_Result.png)
+
 ### Landmark Estimation Performance on DeepFashion2 Validation Set
 | Arch       | BBox Source | AP   | Ap .5 | AP .75 | AP (M) | AP (L) | AR | AR .5 | AR .75 | AR (M) | AR (L) |
 |---|---|---|---|---|---|---|---|---|---|---|---|
