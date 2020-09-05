@@ -137,13 +137,13 @@ class DeepFashion2Dataset(JointsDataset):
         if 'train'  in self.image_set:
             directory = self.image_set
             if self.mini_dataset:
-                return os.path.join(self.root, directory, 'train-coco_style-1000.json')
+                return os.path.join(self.root, directory, 'train-coco_style-32.json')
             else:
                 return os.path.join(self.root, directory, 'train-coco_style.json')
         elif 'validation'  in self.image_set:
             directory = self.image_set
             if self.mini_dataset:
-                return os.path.join(self.root, directory, 'val-coco_style-1000.json')
+                return os.path.join(self.root, directory, 'val-coco_style-64.json')
             else:
                 return os.path.join(self.root, directory, 'val-coco_style.json')
         elif 'test'  in self.image_set:
