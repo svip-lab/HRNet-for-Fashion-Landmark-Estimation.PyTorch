@@ -139,7 +139,7 @@ python tools/test.py \
 ```
 
 ## OneDrive Cloud Storage
-[OneDrive](https://shanghaitecheducn-my.sharepoint.com/:f:/g/personal/qianshh_shanghaitech_edu_cn/EgHK3EsIkQ5Ajt7LvizBoUABRijop8727mv1mhFCwcA6CQ?e=XbM8Fp)
+[OneDrive](https://shanghaitecheducn-my.sharepoint.com/:f:/g/personal/qianshh_shanghaitech_edu_cn/Eo1g551GvWpHtrXxdeYptH4BGUqWCI81fbT1prL93e0z2Q?e=cj6phH)
 
 We provide the following files:
 - Model checkpoint files
@@ -149,8 +149,7 @@ We provide the following files:
 ```
 hrnet-for-fashion-landmark-estimation.pytorch
 |-- models
-|   |-- pose_hrnet-w48_384x288-deepfashion2_mAP_0.7017.pth
-|   `-- pose_hrnet-w48_384x288-deepfashion2_mAP_0.6714.pth
+|   `-- pose_hrnet-w48_384x288-deepfashion2_mAP_0.7017.pth
 |
 |-- data
 |   |-- bbox_result_val.pkl
@@ -158,10 +157,10 @@ hrnet-for-fashion-landmark-estimation.pytorch
 `-- |-- deepfashion2
     `---|-- train
         |   |-- train-coco_style.json           (converted annotation file)
-        |   `-- train-coco_style-1000.json      (truncated for fast debugging)
+        |   `-- train-coco_style-32.json      (truncated for fast debugging)
         `-- validation
             |-- val-coco_style.json             (converted annotation file)
-            `-- val-coco_style-1000.json        (truncated for fast debugging)
+            `-- val-coco_style-64.json        (truncated for fast debugging)
         
 ```
 
