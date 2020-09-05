@@ -65,7 +65,7 @@ Extract the dataset under `${POSE_ROOT}/data`.
 #### 2) Convert annotations into coco-type
 The above code repo provides a script to convert annotations into *coco-type*. 
 
-We uploaded our converted annotation file onto [OneDrive](#OneDrive-Cloud-Storage) named as `train/val-coco_style.json`. We also made truncated json files named as `XX-1000.json` meaning the first 1000 samples in the dataset to save the loading time during development period.
+We uploaded our converted annotation file onto [OneDrive](#OneDrive-Cloud-Storage) named as `train/val-coco_style.json`. We also made truncated json files such as `train-coco_style-32.json` meaning the first 32 samples in the dataset to save the loading time during development period.
 
 
 #### 3) Install the deepfashion_api
@@ -85,12 +85,12 @@ ${POSE_ROOT}
         |   |-- image
         |   |-- annos                           (raw annotation)
         |   |-- train-coco_style.json           (converted annotation file)
-        |   `-- train-coco_style-1000.json      (truncated for fast debugging)
+        |   `-- train-coco_style-32.json      (truncated for fast debugging)
         |-- validation
         |   |-- image
         |   |-- annos                           (raw annotation)
         |   |-- val-coco_style.json             (converted annotation file)
-        |   `-- val-coco_style-1000.json        (truncated for fast debugging)
+        |   `-- val-coco_style-64.json        (truncated for fast debugging)
         `-- json_for_test
             `-- keypoints_test_information.json
 ```
