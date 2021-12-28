@@ -17,8 +17,8 @@ import torch
 import torch.nn.functional as F
 
 from core.evaluate import accuracy
-from core.inference import get_final_preds, get_original_gts
-from utils.transforms import flip_back
+from core.inference import get_final_preds
+from utils.transforms import flip_back, transform_preds
 from utils.vis import save_debug_images
 
 
@@ -67,7 +67,15 @@ def train(config, train_loader, train_dataset, model, criterion, optimizer, epoc
             
             # block irrelevant channels in output
             output = output * channel_mask
-            preds, maxvals = get_final_preds(config, output.detach().cpu().numpy(), c, s, heatmap.detach().cpu().numpy())
+            preds_local, maxvals = get_final_preds(config, output.detach().cpu().numpy(), c, s, heatmap.detach().cpu().numpy())
+
+            # Transform back from heatmap coordinate to image coordinate
+            preds = preds_local.copy()
+            for i in range(preds_local.shape[0]):
+                preds[i] = transform_preds(
+                    preds_local[i], c[i], s[i], 
+                    [config.MODEL.HEATMAP_SIZE[0], config.MODEL.HEATMAP_SIZE[1]]
+                )
         else:
             raise NotImplementedError('{} is not implemented'.format(config.MODEL.TARGET_TYPE))
         loss = criterion(output, target, target_weight)
@@ -107,9 +115,7 @@ def train(config, train_loader, train_dataset, model, criterion, optimizer, epoc
 
             prefix = '{}_{}'.format(os.path.join(output_dir, 'train'), i)
 
-            coeff = config.MODEL.IMAGE_SIZE[0] / config.MODEL.HEATMAP_SIZE[0]
-            save_debug_images(config, input, meta, target, preds*coeff, output,
-                            prefix)
+            save_debug_images(config, input, meta, target, preds_local, output, prefix)
         
 
 def validate(config, val_loader, val_dataset, model, criterion, output_dir,
@@ -182,32 +188,16 @@ def validate(config, val_loader, val_dataset, model, criterion, output_dir,
 
                 # block irrelevant channels in output
                 output = output * channel_mask.unsqueeze(3)
-                preds, maxvals = get_final_preds(config, output.detach().cpu().numpy(), c, s)
+                preds_local, maxvals = get_final_preds(config, output.detach().cpu().numpy(), c, s)
+
+                # Transform back from heatmap coordinate to image coordinate
+                preds = preds_local.copy()
+                for i in range(preds_local.shape[0]):
+                    preds[i] = transform_preds(
+                        preds_local[i], c[i], s[i], 
+                        [config.MODEL.HEATMAP_SIZE[0], config.MODEL.HEATMAP_SIZE[1]]
+                    )
                 
-            elif config.MODEL.TARGET_TYPE == 'coordinate':
-                heatmap, output = output
-
-                if config.TEST.FLIP_TEST:
-                    # this part is ugly, because pytorch has not supported negative index
-                    # input_flipped = model(input[:, :, :, ::-1])
-                    input_flipped = np.flip(input.cpu().numpy(), 3).copy()
-                    input_flipped = torch.from_numpy(input_flipped).cuda()
-                    output_flipped = model(input_flipped)
-                    heatmap_flipped, output_flipped = output_flipped
-                    output_flipped = output_flipped.cpu().numpy()
-                    
-                    category_id_list = meta['category_id'].cpu().numpy().copy()
-                    for j, category_id in enumerate(category_id_list):
-                        output_flipped[j, :, :] = flip_back(output_flipped[j, None],
-                                                val_dataset.flip_pairs[category_id-1],
-                                                config.MODEL.HEATMAP_SIZE[0])
-                    output_flipped = torch.from_numpy(output_flipped.copy()).cuda()
-
-                    output = (output + output_flipped) * 0.5
-                preds, maxvals = get_final_preds(config, output.detach().cpu().numpy(), c, s, heatmap.detach().cpu().numpy())
-
-                # block irrelevant channels in output
-                output = output * channel_mask
             else:
                 raise NotImplementedError('{} is not implemented'.format(config.MODEL.TARGET_TYPE))
             
@@ -253,9 +243,7 @@ def validate(config, val_loader, val_dataset, model, criterion, output_dir,
                     os.path.join(output_dir, 'val'), i
                 )
 
-                coeff = config.MODEL.IMAGE_SIZE[0] / config.MODEL.HEATMAP_SIZE[0]
-                save_debug_images(config, input, meta, target, preds*coeff, output,
-                                  prefix)
+                save_debug_images(config, input, meta, target, preds_local, output, prefix)
 
         name_values, perf_indicator = val_dataset.evaluate(
             config, all_preds, output_dir, all_boxes, image_path,
